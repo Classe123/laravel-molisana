@@ -23,6 +23,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // $mydata = [
+        //     [
+        //         'key' => 'value',
+        //         'key2' => 'value2',
+        //     ],
+        //     [
+        //         'key' => 'pippo',
+        //         'key2' => 'pluto',
+        //     ],
+        // ];
+        // view()->share(compact('mydata'));
     }
 }

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', $product->title)
 @section('content')
 <section class="container bg-white mt-4">
     <h1 class="text-center">{{$product->title}}</h1>

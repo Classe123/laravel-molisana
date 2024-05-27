@@ -1,7 +1,19 @@
 @extends('layouts.app')
+@section('title', 'Prodotti')
+
 @section('content')
   <section class="container mt-4" id="products">
+    <div>
+        <form action="{{route('products.index')}}" method="GET" id="search-form">
+         <select name="search" id="search" class="form-control">
+             <option value="all">Tutti</option>
+             <option value="lunga">Lunghe</option>
+             <option value="corta">Corte</option>
+             <option value="cortissima">Cortissime</option>
+         </select>
 
+        </form>
+     </div>
     <h1 class="text-center">Prodotti</h1>
     <div class="row">
         @foreach ($products as $product)

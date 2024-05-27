@@ -17,7 +17,7 @@ use App\Http\Controllers\RecipeController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::resource('products', ProductController::class);
 //Route::resource('recipes', RecipeController::class);

@@ -1,5 +1,12 @@
 <footer class="bg-white mt-5 pt-5">
     <div class="container">
+        {{-- <div>
+
+            @foreach ($mydata as $data)
+                <span>{{$data['key']}}</span>
+                <span>{{$data['key2']}}</span>
+            @endforeach
+        </div> --}}
         <div class="row">
             <div class="col">
                 <div id="logo" class="">
@@ -29,5 +36,5 @@
         </div>
 
     </div>
-    <img src="{{ Vite::asset('resources/img/footer_bg.jpg') }}" alt="">
+
 </footer>

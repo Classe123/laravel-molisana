@@ -3,27 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //dd($request->query());
+        if (!empty($request->query('search'))) {
+            $type = $request->query('search');
+            $products = Product::where('type', $type)->get();
+        } else {
+            $products = Product::all();
+        }
+
+        return view('products.index', compact('products'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -35,28 +44,44 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //salvataggio e redirezione dell'utente
+        $form_data = $request->all();
+        //dd($form_data);
+        // $new_product = new Product();
+        // $new_product->fill($form_data);
+
+        // $new_product->title = $form_data['title'];
+        // $new_product->description = $form_data['description'];
+        // $new_product->weight = $form_data['weight'];
+        // $new_product->type = $form_data['type'];
+        // $new_product->cooking_time = $form_data['cooking_time'];
+        // $new_product->image = $form_data['image'];
+
+        // $new_product->save();
+        $new_product = Product::create($form_data);
+        return redirect()->route('products.index');
+        //return redirect()->route('products.show', $new_product->id);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  object Product  $id
+     *
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        return view('products.show', compact('product'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
      */
     public function edit($id)
     {
-
+        return view('products.edit');
     }
 
     /**
