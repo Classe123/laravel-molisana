@@ -9,6 +9,18 @@ $fa-font-path: "../webfonts" !default;
 
 @import '~bootstrap/scss/bootstrap';
 
-h1 {
-    color: $text-color;
+body {
+    background-image: url('../img/backpage.jpg');
+    background-size: cover;
+    font-family: sans-serif;
+}
+header{
+    a.active{
+        font-weight: bold;
+    }
+}
+#products{
+    img{
+        max-height: 210px;
+    }
 }
