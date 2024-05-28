@@ -39,15 +39,15 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     *
      */
     public function store(Request $request)
     {
-        //salvataggio e redirezione dell'utente
+        //prelevo i dati del form dall request
         $form_data = $request->all();
         //dd($form_data);
-        // $new_product = new Product();
-        // $new_product->fill($form_data);
+        //    $new_product = new Product();
+        //    $new_product->fill($form_data);
 
         // $new_product->title = $form_data['title'];
         // $new_product->description = $form_data['description'];
@@ -56,9 +56,10 @@ class ProductController extends Controller
         // $new_product->cooking_time = $form_data['cooking_time'];
         // $new_product->image = $form_data['image'];
 
-        // $new_product->save();
+        //$new_product->save();
         $new_product = Product::create($form_data);
-        return redirect()->route('products.index');
+
+        return redirect()->route('products.index')->with('message', "New product created");
         //return redirect()->route('products.show', $new_product->id);
     }
 
@@ -79,9 +80,9 @@ class ProductController extends Controller
      * @param  int  $id
      *
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        return view('products.edit');
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -91,19 +92,31 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //salvataggio e redirezione dell'utente
+        //$product = Product::find($id);
+        $form_data = $request->all();
+        // $product->title = $form_data['title'];
+        // $product->description = $form_data['description'];
+        // $product->weight = $form_data['weight'];
+        // $product->type = $form_data['type'];
+        // $product->cooking_time = $form_data['cooking_time'];
+        // $product->image = $form_data['image'];
+        //$product->update();
+        $product->update($form_data);
+        return redirect()->route('products.show', $product->id);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //cancellazione e redirezione dell'utente
+        $product->delete();
+        return redirect()->route('products.index')->with('message', "Product id:  {$product->id} Deleted");
     }
 }

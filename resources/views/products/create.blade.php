@@ -8,7 +8,7 @@
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
-            <input type="text" class="form-control" id="title" aria-describedby="titleHelp" name="title" required>
+            <input type="text" class="form-control" id="title" aria-describedby="titleHelp" name="title" value="" required>
             <div id="titleHelp" class="form-text">bhooo</div>
           </div>
           <div class="mb-3">
