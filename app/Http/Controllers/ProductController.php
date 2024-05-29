@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -41,10 +44,20 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      *
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
+
+        //valido i dati
+
+        $form_data = $request->validated();
+        // $request->validate([
+        //     'title' => 'required|max:255',
+        // ]);
+        //$form_data = $request->all();
+        //
+        //$form_data = $this->validation($request->all());
         //prelevo i dati del form dall request
-        $form_data = $request->all();
+        //$form_data = $request->all();
         //dd($form_data);
         //    $new_product = new Product();
         //    $new_product->fill($form_data);
@@ -92,10 +105,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
+
+        $form_data = $request->validated();
         //$product = Product::find($id);
-        $form_data = $request->all();
+        //$form_data = $request->all();
+        //$form_data = $this->validation($request->all());
         // $product->title = $form_data['title'];
         // $product->description = $form_data['description'];
         // $product->weight = $form_data['weight'];
@@ -119,4 +135,28 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index')->with('message', "Product id:  {$product->id} Deleted");
     }
+
+    // public function validation($data)
+    // {
+    //     $validator = Validator::make($data, [
+    //         'title' => 'required|max:255|min:3',
+    //         'description' => 'nullable',
+    //         'image' => 'nullable|max:255',
+    //         'type' => 'required|max:20',
+    //         'cooking_time' => 'required|max:20',
+    //         'weight' => 'required|max:20',
+    //     ], [
+    //         'title.required' => 'Il titolo è obbligatorio',
+    //         'title.min' => 'Il titolo deve avere almeno :min caratteri',
+    //         'title.max' => 'Il titolo deve avere massimo :max caratteri',
+    //         'type.required' => 'Il tipo è obbligatorio',
+    //         'type.max' => 'Il tipo deve avere massimo :max caratteri',
+    //         'cooking_time.required' => 'Il tempo di cottura è obbligatorio',
+    //         'cooking_time.max' => 'Il tempo di cottura deve avere massimo :max caratteri',
+    //         'weight.required' => 'Il peso è obbligatorio',
+    //         'weight.max' => 'Il peso deve avere massimo :max caratteri',
+    //     ])->validate();
+
+    //     return $validator;
+    // }
 }

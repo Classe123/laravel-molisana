@@ -28,4 +28,9 @@ footer {
     background-image: url('../img/footer.jpg');
     background-repeat: no-repeat;
 }
-
+input:invalid{
+    border-left: 15px solid red;
+}
+input:valid{
+    border-left: 15px solid green;
+}

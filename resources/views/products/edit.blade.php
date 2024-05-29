@@ -7,9 +7,11 @@
         @csrf
         @method('PUT')
         <div class="mb-3">
-            <label for="title" class="form-label">Titolo</label>
+            <label for="title" class="form-label @error('title') is-invalid @enderror">Titolo</label>
             <input type="text" class="form-control" id="title" aria-describedby="titleHelp" name="title" value="{{$product->title}}" required>
-            <div id="titleHelp" class="form-text">bhooo</div>
+            @error('title')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
@@ -19,7 +21,7 @@
           </div>
           <div class="mb-3">
             <label for="image" class="form-label">Immagine</label>
-            <input type="text" class="form-control" id="image"  name="image" value="{{$product->image}}">
+            <input type="text" class="form-control" id="image"  name="image" value="{{old('image', $product->image)}}">
           </div>
           <div class="mb-3">
             <label for="weight" class="form-label">Peso</label>
@@ -31,11 +33,14 @@
           </div>
           <div class="mb-3">
             <label for="type" class="form-label">Tipo</label>
-            <select class="form-control" id="type"  name="type" value="{{$product->type}}" required>
-              <option value="corta" {{$product->type === 'corta' ? 'selected' : ''}} >Corta</option>
-              <option value="lunga" {{$product->type === 'lunga' ? 'selected' : ''}}>Lunga</option>
-              <option value="cortissima" {{$product->type === 'cortissima' ? 'selected' : ''}}>Cortissima</option>
+            <select class="form-control @error('type') is-invalid @enderror" id="type"  name="type" value="{{$product->type}}" required>
+              <option value="corta" {{old('type',$product->type === 'corta' ? 'selected' : '')}} >Corta</option>
+              <option value="lunga" {{old('type',$product->type === 'lunga' ? 'selected' : '')}}>Lunga</option>
+              <option value="cortissima" {{old('type',$product->type === 'cortissima' ? 'selected' : '')}}>Cortissima</option>
             </select>
+            @error('type')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
           </div>
         <button type="submit" class="btn btn-primary">Modifica</button>
         <button type="reset" class="btn btn-danger">Annulla</button>
